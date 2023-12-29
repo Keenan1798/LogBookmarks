@@ -35,7 +35,7 @@
  
 
 
-/div>    `;
+</div>    `;
     var linksContainer = document.querySelector('.linksContainer___LiOTN');
     if (linksContainer) {
         linksContainer.insertBefore(newButton, linksContainer.firstChild);

@@ -1,0 +1,51 @@
+
+// ==UserScript==
+// @name         Log Bookmarks
+// @namespace    http://tampermonkey.net/
+// @version      1
+// @description  Create bookmarks for log page
+// @author       keenan
+// @match        https://www.torn.com/page.php?sid=log*
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    var newButton = document.createElement('div');
+    newButton.className = 'content-title-links custom-dropdown';
+    newButton.setAttribute('role', 'list');
+    newButton.innerHTML = `
+        <a role="button" aria-labelledby="custom-dropdown" class="custom-dropdown-button t-clear h c-pointer  m-icon line-h24 right last" href="#" style="padding-left: 10px; padding-right: 10px" id="custom-dropdown-link">
+            <span class="icon-wrap svg-icon-wrap">
+                <span class="link-icon-svg custom-dropdown-icon">
+                </span>
+            </span>
+            <span class="linkTitle____NPyM" id="custom-dropdown">Log Bookmarks</span>
+        </a>
+        <div class="custom-dropdown-content" style="display: none; position: absolute; top: 7%; left: 50%; background-color: #fff; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); border: 1px solid #ddd; z-index: 1;">
+   <a href="https://www.torn.com/page.php?sid=log&log=8842,8843" style="display: block;">Did my nerve change?</a>
+  <a href="https://www.torn.com/page.php?sid=log&log=5411,4102,4800" style="display: block;">Have I paid my revivers?</a>
+  <a href="https://www.torn.com/page.php?sid=log&log=400,401" style="display: block;">Have I used my newsletter?</a>
+            <a href="https://www.torn.com/page.php?sid=log&cat=210 " style="display: block;">Last Christmas town action</a>
+            <a href="https://www.torn.com/page.php?sid=log&log=2615" style="display: block;">Cache opening</a>
+            <a href="https://www.torn.com/page.php?sid=log&cat=181,182" style="display: block;">All attacks</a>
+            </div>
+    `;
+
+    // Find the container where you want to add the button
+    var linksContainer = document.querySelector('.linksContainer___LiOTN');
+
+    // Add the new button to the container
+    if (linksContainer) {
+        linksContainer.insertBefore(newButton, linksContainer.firstChild);
+
+        // Add event listener to toggle the visibility of the links
+        var dropdownLink = document.getElementById('custom-dropdown-link');
+        var dropdownContent = document.querySelector('.custom-dropdown-content');
+
+        dropdownLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            dropdownContent.style.display = dropdownContent.style.display === 'none' ? 'block' : 'none';
+        });
+    }
+})();
